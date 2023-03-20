@@ -5,6 +5,8 @@ services:
     ports:
       #local port:server port
       - "8080:80"
+    volumes:
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
   #notes
   #The location of the server's config file: /etc/nginx/conf.d/default.conf
   #To get to the server's shell, run the following docker command:
@@ -16,6 +18,8 @@ services:
   app:
     build:
       dockerfile: ./php/Dockerfile
+    volumes:
+      - ./app:/app
   #notes
   #before building this internally, we did the following from the commandline
   #docker build -t garyclarke:php81 -f php/Dockerfile .

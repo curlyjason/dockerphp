@@ -1,0 +1,27 @@
+services:
+  # nginx
+  web:
+    image: nginx:latest
+    ports:
+      #local port:server port
+      - "8080:80"
+  #notes
+  #The location of the server's config file: /etc/nginx/conf.d/default.conf
+  #To get to the server's shell, run the following docker command:
+  # docker exec -it docker-php-web-1 sh
+  # The -it give you an interactive terminal
+  # The next bit is the name of the container (which you can ind from docker compose ps)
+
+  # php
+  app:
+    build:
+      dockerfile: ./php/Dockerfile
+  #notes
+  #before building this internally, we did the following from the commandline
+  #docker build -t garyclarke:php81 -f php/Dockerfile .
+  #The -t tag is to name the docker image (with the 'garyclarke' repository, and the php81 tag)
+  #the -f tag is to define the Dockerfile we want to use (we put this in the php folder)
+  #The trailing period is necessary, which includes any other resources in the folder
+
+  # mysql
+  # redis
